@@ -16,7 +16,12 @@
   font-size: 1.5rem;
 }
 
+#timer {
+  font-size: 5rem;
+}
+
 #title {
   color: #FF4B46;
+  font-weight: 700;
   padding-top: 50px;
 }

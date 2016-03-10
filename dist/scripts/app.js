@@ -18,23 +18,18 @@ angular.module('bloctime', ['firebase', 'ui.router'])
 
 .constant('SESSION_TIME', {
   work: 1500,
-  break: 300
+  shortBreak: 300,
+  longBreak: 1800
 })
 
 .controller('HomeCtrl', ['$scope', '$interval', '$firebaseObject',
   function($scope, $interval, $firebaseObject) {
     var ref = new Firebase('https://brilliant-inferno-3345.firebaseio.com/');
     $scope.data = $firebaseObject(ref);
-
-
-  $scope.isDisabled = false;
-
-  $scope.disableButton = function() {
-    $scope.isDisabled = true;
   }
-}])
+])
 
-.directive('timer', ['SESSION_TIME', '$interval', function(SESSION_TIME, $interval) {
+.directive('pomodoroTimer', ['SESSION_TIME', '$interval', function(SESSION_TIME, $interval) {
   return {
     restrict: 'E',
     templateUrl: '/templates/timer.html',
@@ -45,6 +40,7 @@ angular.module('bloctime', ['firebase', 'ui.router'])
       scope.workButton = 'Pomodoro!';
       scope.onBreak = false;
       var timer;
+      var sessionsCounter = 0;
 
       scope.countdown = function() {
         if (scope.workButton === 'Reset Pomodoro') {
@@ -57,10 +53,17 @@ angular.module('bloctime', ['firebase', 'ui.router'])
             scope.time--;
             if (scope.time < 0) {
               $interval.cancel(timer);
+              sessionsCounter++;
               if (!scope.onBreak) {
                 scope.onBreak = true;
-                scope.time = SESSION_TIME.break;
-                scope.breakText = 'Break time! Chill.';
+                if (sessionsCounter >= 4) {
+                  scope.time = SESSION_TIME.longBreak;
+                  scope.breakText = "That's 4 sessions! Take a long break!";
+                  sessionsCounter = 0;
+                } else {
+                  scope.time = SESSION_TIME.shortBreak;
+                  scope.breakText = 'Take a short break!';
+                }
                 timer = $interval(function() {
                   scope.time--;
                   if (scope.time < 0) {
