@@ -3,7 +3,7 @@
     <div class="col-md-8 col-md-offset-2">
       <h1 id="title">POMODORO TIMER</h1>
       <p id="description">Learn about the&nbsp;<a href="https://en.wikipedia.org/w/index.php?title=Pomodoro_Technique&oldid=708755071" target="_blank">Pomodoro Technique</a></p>
-      <h1>{{ time | timeDisplay | date: 'mm:ss' }}</h1>
+      <h1 id="timer">{{ time | timeDisplay | date: 'mm:ss' }}</h1>
       <button class="btn btn-info btn-lg" ng-hide="onBreak" ng-click="countdown()">{{ workButton }}&nbsp;<i class="ion-clock"></i></button>
       <div id="break" ng-show="onBreak" ng-disabled="isDisabled" ng-click="disableButton()">{{ breakText }}&nbsp;<i class="ion-beer"></i></div>
     </div>
