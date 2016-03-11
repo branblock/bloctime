@@ -17,9 +17,13 @@ angular.module('bloctime', ['firebase', 'ui.router'])
 })
 
 .constant('SESSION_TIME', {
-  work: 1500,
-  shortBreak: 300,
-  longBreak: 1800
+  // work: 1500,
+  // shortBreak: 300,
+  // longBreak: 1800
+  // for testing
+  work: 10,
+  shortBreak: 5,
+  longBreak: 8
 })
 
 .controller('HomeCtrl', ['$scope', '$interval', '$firebaseObject',
@@ -41,6 +45,9 @@ angular.module('bloctime', ['firebase', 'ui.router'])
       scope.onBreak = false;
       var timer;
       var sessionsCounter = 0;
+      var sessionSound = new buzz.sound( "/assets/sounds/ding.mp3", {
+        preload: true
+      });
 
       scope.countdown = function() {
         if (scope.workButton === 'Reset Pomodoro') {
@@ -78,6 +85,13 @@ angular.module('bloctime', ['firebase', 'ui.router'])
           }, 1000);
         }
       }
+
+      scope.$watch('time', function() {
+        if (scope.time === 0) {
+          sessionSound.play();
+        }
+      })
+
     }
   }
 }])
