@@ -5,7 +5,12 @@
 }
 
 .btn-lg {
+  margin-bottom: 20px;
   margin-top: 10px;
+}
+
+#clock {
+  font-size: 10rem;
 }
 
 .col-md-8 {
@@ -16,12 +21,35 @@
   font-size: 1.5rem;
 }
 
-#timer {
-  font-size: 5rem;
+input {
+  border: 1px solid #ddd;
+  margin: 10px 0 5px;
+  width: 325px;
+  padding-left: 5px;
+}
+
+li {
+  margin-top:10px;
+}
+
+.panel {
+  margin: 30px auto 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 360px;
+}
+
+.panel-heading {
+  text-align: center;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 #title {
   color: #FF4B46;
   font-weight: 700;
-  padding-top: 50px;
+  padding-top: 30px;
 }
