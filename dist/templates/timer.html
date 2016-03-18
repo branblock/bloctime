@@ -1,5 +1,5 @@
 <div>
   <h1 id="clock">{{ time | timeDisplay | date: 'mm:ss' }}</h1>
-  <button class="btn btn-info btn-lg" ng-hide="onBreak" ng-click="countdown()">{{ workButton }}&nbsp;<i class="ion-clock"></i></button>
-  <div id="break" ng-show="onBreak">{{ breakText }}&nbsp;<i class="ion-beer"></i></div>
+  <button class="btn btn-primary btn-lg" ng-hide="onBreak" ng-click="countdown()">{{ workButton }}</button>
+  <div id="break" ng-show="onBreak">{{ breakText }}</div>
 </div>

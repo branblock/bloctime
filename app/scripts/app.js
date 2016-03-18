@@ -60,7 +60,7 @@
         scope: { },
         link: function(scope, element, attributes) {
           scope.time = MY_CONSTANTS.work;
-          scope.workButton = 'Pomodoro!';
+          scope.workButton = 'Start';
           scope.onBreak = false;
           var timer;
           var sessionsCounter = 0;
@@ -69,12 +69,12 @@
           });
 
           scope.countdown = function() {
-            if (scope.workButton === 'Reset Pomodoro') {
+            if (scope.workButton === 'Reset') {
               scope.time = MY_CONSTANTS.work;
               $interval.cancel(timer);
-              scope.workButton = 'Pomodoro!';
+              scope.workButton = 'Start';
             } else {
-              scope.workButton = 'Reset Pomodoro';
+              scope.workButton = 'Reset';
               timer = $interval(function() {
                 scope.time--;
                 if (scope.time < 0) {
@@ -84,11 +84,11 @@
                     scope.onBreak = true;
                     if (sessionsCounter >= 4) {
                       scope.time = MY_CONSTANTS.longBreak;
-                      scope.breakText = "That's 4 sessions! Take a long break!";
+                      scope.breakText = "That's 4 sessions. Take a long break!";
                       sessionsCounter = 0;
                     } else {
                       scope.time = MY_CONSTANTS.shortBreak;
-                      scope.breakText = 'Take a short break!';
+                      scope.breakText = 'Break time!';
                     }
                     timer = $interval(function() {
                       scope.time--;
@@ -96,7 +96,7 @@
                         $interval.cancel(timer);
                         scope.onBreak = false;
                         scope.time = MY_CONSTANTS.work;
-                        scope.workButton = 'Pomodoro!';
+                        scope.workButton = 'Start';
                       }
                     }, 1000);
                   }
